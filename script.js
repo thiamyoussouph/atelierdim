@@ -4,8 +4,13 @@ const resetButton = document.getElementById("reset");
 const word = document.getElementById("word");
 
 // Mot et images correspondantes
-const words = ["cacawette", "cafe", "Cerise", "Raisin"];
-const imagePaths = ["CACAWETTE.jfif", "CAFFEE.jfif", "cerise.jfif", "resain.jfif"];
+const words = ["Cacahuète", "Café", "Cerise", "Raisin"];
+const imagePaths = [
+  "cacahuete.jfif",
+  "cafe.jfif",
+  "cerise.jfif",
+  "raisin.jfif",
+];
 let correctImageIndex = 0; // Index de l'image correcte
 let attempts = 0; // Nombre de tentatives
 
@@ -20,6 +25,9 @@ function initializeGame() {
     img.alt = words[(index + correctImageIndex) % words.length];
     img.classList.add("hidden"); // Masquer les images au départ
   });
+
+  message.textContent = "";
+  message.classList.remove("correct", "incorrect"); // Réinitialiser les classes de message
 }
 
 // Vérification du clic sur une image
@@ -31,16 +39,22 @@ images.forEach((img, index) => {
     if (index === correctImageIndex) {
       revealImages();
       message.textContent = "Correct! Les images sont dévoilées.";
+      message.classList.remove("incorrect");
+      message.classList.add("correct");
     } else {
       attempts++;
       if (attempts >= 3) {
         revealImages();
         message.textContent =
-          "Vous avez échoué deux fois. Les images sont dévoilées.";
+          "Vous avez échoué trois fois. Les images sont dévoilées.";
+        message.classList.remove("correct");
+        message.classList.add("incorrect");
       } else {
         message.textContent = `Incorrect, essayez encore! (${
-          3- attempts
+          3 - attempts
         } tentatives restantes)`;
+        message.classList.remove("correct");
+        message.classList.add("incorrect");
       }
     }
   });
@@ -57,6 +71,7 @@ function revealImages() {
 resetButton.addEventListener("click", () => {
   initializeGame();
   message.textContent = "";
+  message.classList.remove("correct", "incorrect");
 });
 
 // Initialisation au chargement de la page

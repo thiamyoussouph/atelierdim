@@ -1,0 +1,52 @@
+.images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+h1 {
+  text-align: center;
+  margin: 20px 0;
+}
+.wold {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.image {
+  margin: 10px;
+  width: 150px;
+  height: 150px;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+
+.hidden {
+  filter: grayscale(100%);
+}
+
+.image:hover.hidden {
+  filter: grayscale(
+    100%
+  ); /* Empêche de retirer le grisage au survol si caché */
+}
+
+.image:hover:not(.hidden) {
+  filter: grayscale(0%);
+}
+
+.correct {
+  border-color: green;
+}
+
+.incorrect {
+  border-color: red;
+}
+
+.reset {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
